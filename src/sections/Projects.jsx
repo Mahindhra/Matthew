@@ -1,150 +1,102 @@
 import React from 'react';
-import { Smartphone, Trophy, Calendar, Github, ExternalLink, Code2, Sparkles, Layers, Info } from 'lucide-react';
+import { Smartphone, Calendar, Award, Code, PlusCircle, ArrowUpRight } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
-import { projects } from '../data/portfolioData';
+import { projectActivities } from '../data/portfolioData';
 
 export default function Projects() {
-  return (
-    <section id="projects" className="relative py-20 lg:py-28 overflow-hidden bg-slate-900/40 dark:bg-[#070b14]/50">
-      
-      {/* Background radial accent */}
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+  const highlightItem = projectActivities.find(p => p.isHighlight);
+  const futureItems = projectActivities.filter(p => !p.isHighlight);
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+  return (
+    <section id="projects" className="py-20 md:py-28 bg-slate-50 border-b border-slate-200/80">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         <SectionHeader
-          badge="Practical Work"
-          title="Projects &"
-          highlight="Hackathons"
-          subtitle="Real-world engineering challenges, hackathons, and extensible project templates ready for ongoing development."
+          label="Practical Work"
+          title="Projects & Technical Activities"
+          subtitle="Real-world engineering challenges, live hackathons, and extensible workspace for future project releases."
         />
 
-        {/* Flagship Hackathon Feature Card */}
-        {projects.filter(p => p.featured).map((hackathon) => (
-          <div
-            key={hackathon.id}
-            className="mb-12 relative rounded-3xl glass-card p-6 sm:p-10 border-2 border-primary-500/40 shadow-2xl overflow-hidden group"
-          >
-            {/* Ambient Background Gradient */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-primary-500/20 via-purple-500/15 to-transparent rounded-tr-3xl rounded-bl-full pointer-events-none"></div>
-
-            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
-              <div className="lg:col-span-8 space-y-4">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary-500/20 text-primary-300 border border-primary-500/40">
-                    <Trophy className="w-3.5 h-3.5 text-amber-400" />
-                    {hackathon.badge}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-xs text-slate-400 font-mono">
-                    <Calendar className="w-3.5 h-3.5 text-primary-400" />
-                    {hackathon.date}
-                  </span>
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
-                  {hackathon.title}
-                </h3>
-
-                <blockquote className="p-4 rounded-2xl bg-slate-950/70 border-l-4 border-primary-500 text-sm sm:text-base text-slate-200 leading-relaxed italic">
-                  "{hackathon.description}"
-                </blockquote>
-
-                <div className="space-y-2 pt-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
-                    Challenge Highlights & Applied Skills:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-slate-300">
-                    {hackathon.highlights.map((h, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 shrink-0"></span>
-                        <span>{h}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-3">
-                  <div className="flex flex-wrap gap-1.5">
-                    {hackathon.technologies.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 rounded-xl text-xs font-semibold bg-slate-900 text-primary-300 border border-slate-800"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Decorative Graphic / Badge */}
-              <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-slate-950/80 border border-slate-800 text-center space-y-4">
-                <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-primary-600 via-indigo-600 to-purple-600 p-[2px] shadow-xl shadow-primary-500/30">
-                  <div className="w-full h-full bg-slate-950 rounded-[22px] flex items-center justify-center">
-                    <Smartphone className="w-10 h-10 text-primary-400 animate-pulse" />
-                  </div>
+        {/* Featured Android Hackathon Card */}
+        {highlightItem && (
+          <div className="pro-card p-6 sm:p-8 bg-white mb-8 border-l-4 border-l-blue-600">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-slate-100">
+              <div className="flex items-start gap-3.5">
+                <div className="w-11 h-11 rounded-md bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+                  <Smartphone className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-base">Android Live Sprint</h4>
-                  <p className="text-xs text-slate-400 mt-1">
-                    5-Day Intensive Hackathon (Sep 30 - Oct 04, 2024)
-                  </p>
-                </div>
-                <div className="w-full pt-2 border-t border-slate-800 text-[11px] text-emerald-400 font-semibold flex items-center justify-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Honored for Outstanding Participation</span>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                      <Award className="w-3 h-3 text-blue-600" />
+                      {highlightItem.achievement}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mt-1">
+                    {highlightItem.title}
+                  </h3>
                 </div>
               </div>
 
+              <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-50 px-2.5 py-1 rounded border border-slate-200 self-start">
+                <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                <span>{highlightItem.date}</span>
+              </div>
+            </div>
+
+            <p className="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
+              "{highlightItem.description}"
+            </p>
+
+            <div className="mt-5 pt-4 border-t border-slate-100 flex flex-wrap gap-2">
+              {highlightItem.tags.map((tag, i) => (
+                <span
+                  key={i}
+                  className="px-2.5 py-1 rounded text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
-        ))}
+        )}
 
-        {/* Project Placeholders Grid */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
-            <Info className="w-4 h-4 text-primary-400" />
-            <span>Upcoming Portfolio Modules (Editable Placeholders)</span>
+        {/* Future Projects Placeholder Area */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <PlusCircle className="w-4 h-4 text-slate-400" />
+            <span>Future Software Projects (Editable Workspace)</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {projects.filter(p => p.isPlaceholder).map((project) => (
+            {futureItems.map((project) => (
               <div
                 key={project.id}
-                className="relative rounded-3xl glass-card p-6 sm:p-7 border border-dashed border-slate-700 hover:border-primary-500/50 transition-all duration-300 flex flex-col justify-between group"
+                className="pro-card p-6 bg-white border-dashed border-slate-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                      {project.badge}
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                      {project.achievement}
                     </span>
-                    <span className="text-[11px] text-slate-400 font-mono">
-                      {project.status}
+                    <span className="text-xs text-slate-400 font-mono">
+                      {project.date}
                     </span>
                   </div>
 
-                  <h4 className="text-lg font-bold text-slate-900 dark:text-white">
+                  <h4 className="text-base font-bold text-slate-800">
                     {project.title}
                   </h4>
 
-                  <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
                     {project.description}
                   </p>
-
-                  <div className="mt-4 space-y-1.5">
-                    {project.highlights.map((h, i) => (
-                      <div key={i} className="text-xs text-slate-300 flex items-start gap-1.5">
-                        <span className="text-primary-400">•</span>
-                        <span>{h}</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.technologies.map((t, i) => (
-                      <span key={i} className="px-2 py-0.5 rounded-md text-[11px] bg-slate-900 text-slate-400 border border-slate-800 font-mono">
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map((t, idx) => (
+                      <span key={idx} className="text-[11px] px-2 py-0.5 rounded bg-slate-50 text-slate-600 border border-slate-200">
                         {t}
                       </span>
                     ))}
@@ -154,13 +106,12 @@ export default function Projects() {
                     href="https://github.com/Mahindhra"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary-400 hover:text-primary-300 transition-colors"
+                    className="text-xs font-medium text-blue-600 hover:text-blue-800 flex items-center gap-1"
                   >
-                    <Github className="w-3.5 h-3.5" />
-                    <span>View GitHub</span>
+                    <span>GitHub</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
-
               </div>
             ))}
           </div>
